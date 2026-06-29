@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Ravish Rajiv Bramhe Photography</title>
+  <meta name="description" content="Ravish Rajiv Bramhe — Commercial & Editorial Photographer based in Varanasi, India.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .blog-section { padding: clamp(60px,9vh,120px) clamp(24px,5vw,80px); border-top: 1px solid var(--border); }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0; margin-top: 56px; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .blog-card { padding: 40px 36px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    .blog-card:hover { background: var(--bg-2); }
+    .blog-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: inline-block; border: 1px solid var(--border); padding: 4px 10px; }
+    .blog-date { font-size: 10px; letter-spacing: 0.2em; color: var(--text-dim); margin-bottom: 14px; display: block; }
+    .blog-title { font-family: var(--font-display); font-size: clamp(20px, 2vw, 26px); font-weight: 400; color: var(--text); margin-bottom: 14px; line-height: 1.3; }
+    .blog-excerpt { font-size: 13px; line-height: 1.85; color: var(--text-muted); margin-bottom: 24px; }
+    .blog-read { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text); display: inline-flex; align-items: center; gap: 8px; transition: gap 0.2s; }
+    .blog-card:hover .blog-read { gap: 14px; }
+
+    /* Modal overlay */
+    .blog-modal { position: fixed; inset: 0; z-index: 8000; background: rgba(0,0,0,0.92); display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 40px 20px; opacity: 0; visibility: hidden; transition: opacity 0.35s, visibility 0.35s; }
+    .blog-modal.open { opacity: 1; visibility: visible; }
+    .blog-modal-inner { max-width: 720px; width: 100%; background: var(--bg); padding: clamp(32px,6vw,80px); position: relative; margin: auto; }
+    .blog-modal-close { position: absolute; top: 24px; right: 24px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; background: none; border: none; font-family: var(--font-body); transition: color 0.2s; }
+    .blog-modal-close:hover { color: var(--text); }
+    .blog-modal-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); padding: 4px 10px; display: inline-block; margin-bottom: 20px; }
+    .blog-modal-title { font-family: var(--font-display); font-size: clamp(28px,4vw,52px); font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 12px; }
+    .blog-modal-date { font-size: 11px; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 40px; display: block; border-bottom: 1px solid var(--border); padding-bottom: 28px; }
+    .blog-modal-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 40px; background: var(--bg-3); }
+    .blog-modal-body p { font-size: 15px; line-height: 1.9; color: var(--text-muted); margin-bottom: 22px; }
+    .blog-modal-body h3 { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--text); margin: 36px 0 14px; }
+    .blog-modal-body blockquote { border-left: 2px solid var(--border-hover); padding-left: 24px; margin: 32px 0; font-family: var(--font-display); font-size: 20px; font-style: italic; color: var(--text); line-height: 1.5; }
+  </style>
+</head>
+<body class="dark">
+
+<div id="scroll-progress"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Ravish Bramhe</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="btn-theme" class="btn-icon" aria-label="Toggle theme">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+    <button id="btn-menu" class="btn-menu" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-nav" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- About Hero -->
+<header class="about-hero">
+  <div class="about-hero-img">
+    <img src="assets/images/fashion/VB5495.jpg" alt="Ravish Rajiv Bramhe — Photographer">
+  </div>
+  <div class="about-hero-text fade-up">
+    <p class="section-eyebrow">The Eye Behind the Lens</p>
+    <h1 class="about-name">Ravish Rajiv Bramhe</h1>
+    <p class="about-tagline">Commercial &amp; Editorial Photographer — Varanasi, India</p>
+  </div>
+</header>
+
+<!-- Bio -->
+<section class="section about-section">
+  <div class="about-grid">
+    <div class="about-bio fade-up">
+      <h2 class="about-section-title">Biography</h2>
+      <p>Based in Varanasi, India, I am a commercial and editorial photographer with over 4 years of experience working across fashion, events, medical, interior, and product photography. My work is rooted in the rich visual culture of one of the world's oldest cities — a place that has sharpened my eye for light, detail, and the decisive moment.</p>
+      <p>I believe every image should do one thing well — communicate. Whether I am photographing a fashion campaign, documenting a medical conference, or capturing the quiet elegance of an interior space, I bring the same discipline and attention to every frame. My approach is clean, considered, and always image-first.</p>
+      <p>Over the past four years I have had the privilege of working with leading organisations and brands including the Institute of Medical Sciences (IMS) BHU, Vandana Fashion, Humans of Varanasi, IndianShelf, and Klothing Yards — delivering imagery that serves their brands with clarity and purpose.</p>
+    </div>
+    <div class="about-details fade-up delay-2">
+      <div class="about-detail-block">
+        <h3>Approach</h3>
+        <p>Every image begins with observation. I believe the best photographs happen when preparation meets the unrepeatable — and I build every project around that philosophy.</p>
+      </div>
+      <div class="about-detail-block">
+        <h3>Specialities</h3>
+        <p>Fashion, Events, Medical Conferences, Medical Shoots, Interior & Product Photography.</p>
+      </div>
+      <div class="about-detail-block">
+        <h3>Based In</h3>
+        <p>Varanasi, Uttar Pradesh, India.<br>Available for travel nationwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section about-services">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow fade-up">What I Offer</p>
+      <h2 class="section-title fade-up delay-1">Services</h2>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-item fade-up delay-1">
+      <span class="service-num">01</span>
+      <h3 class="service-name">Fashion &amp; Editorial</h3>
+      <p class="service-desc">Campaign shoots, lookbooks, and editorial spreads for fashion brands and designers.</p>
+    </div>
+    <div class="service-item fade-up delay-2">
+      <span class="service-num">02</span>
+      <h3 class="service-name">Events</h3>
+      <p class="service-desc">Corporate events, medical conferences, galas, and institutional occasions.</p>
+    </div>
+    <div class="service-item fade-up delay-3">
+      <span class="service-num">03</span>
+      <h3 class="service-name">Medical Photography</h3>
+      <p class="service-desc">Clinical and medical photography for hospitals, institutions, and publications.</p>
+    </div>
+    <div class="service-item fade-up delay-1">
+      <span class="service-num">04</span>
+      <h3 class="service-name">Interior &amp; Architecture</h3>
+      <p class="service-desc">Residential and commercial interiors for architects, designers, and developers.</p>
+    </div>
+    <div class="service-item fade-up delay-2">
+      <span class="service-num">05</span>
+      <h3 class="service-name">Product</h3>
+      <p class="service-desc">E-commerce, catalogue, and hero product photography for brands and retailers.</p>
+    </div>
+    <div class="service-item fade-up delay-3">
+      <span class="service-num">06</span>
+      <h3 class="service-name">Lifestyle</h3>
+      <p class="service-desc">Authentic lifestyle and portrait photography for brands and personal projects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Clients -->
+<section class="section">
+  <div class="fade-up">
+    <p class="section-eyebrow">Trusted By</p>
+    <h2 class="section-title-sm">Selected Clients</h2>
+    <ul class="plain-list">
+      <li>Institute of Medical Sciences (IMS) BHU</li>
+      <li>Vandana Fashion</li>
+      <li>Humans of Varanasi</li>
+      <li>IndianShelf</li>
+      <li>Klothing Yards</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Blog -->
+<section class="blog-section">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow fade-up">Thoughts &amp; Stories</p>
+      <h2 class="section-title fade-up delay-1">Blog</h2>
+    </div>
+  </div>
+
+  <div class="blog-grid">
+
+    <!-- Post 1 -->
+    <div class="blog-card fade-up delay-1" onclick="openBlog('blog1')">
+      <span class="blog-tag">Fashion Photography</span>
+      <span class="blog-date">May 2025</span>
+      <h3 class="blog-title">5 Tips That Will Instantly Improve Your Fashion Photographs</h3>
+      <p class="blog-excerpt">Fashion photography is not about having the most expensive camera or the biggest studio. It is about understanding your subject, reading light, and making your model feel at ease in front of the lens.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="blog-card fade-up delay-2" onclick="openBlog('blog2')">
+      <span class="blog-tag">Product Photography</span>
+      <span class="blog-date">April 2025</span>
+      <h3 class="blog-title">How to Shoot Products That Actually Sell</h3>
+      <p class="blog-excerpt">A great product photograph does not just show what something looks like — it makes the viewer want to own it. Here is what I have learned from shooting for brands like IndianShelf and Klothing Yards.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="blog-card fade-up delay-3" onclick="openBlog('blog3')">
+      <span class="blog-tag">Event Photography</span>
+      <span class="blog-date">March 2025</span>
+      <h3 class="blog-title">How to Capture Events Without Missing a Single Moment</h3>
+      <p class="blog-excerpt">Events move fast. People move faster. After shooting conferences and galas for institutions like IMS BHU, I have developed a system that means I never miss the moments that matter.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="blog-card fade-up delay-1" onclick="openBlog('blog4')">
+      <span class="blog-tag">Varanasi</span>
+      <span class="blog-date">February 2025</span>
+      <h3 class="blog-title">Life as a Photographer in the World's Oldest City</h3>
+      <p class="blog-excerpt">Varanasi does not give you easy photographs. It gives you real ones. Living and working here has taught me things about light, patience, and humanity that no photography course ever could.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="blog-card fade-up delay-2" onclick="openBlog('blog5')">
+      <span class="blog-tag">Story Behind the Shot</span>
+      <span class="blog-date">January 2025</span>
+      <h3 class="blog-title">The Ghat at Dawn — A Story Behind the Frame</h3>
+      <p class="blog-excerpt">I arrived at the ghats at 4:47 AM. The city was still sleeping, the Ganga was still, and the only sound was the distant bell of a temple. What happened in the next twenty minutes changed how I see photography.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+    <!-- Post 6 -->
+    <div class="blog-card fade-up delay-3" onclick="openBlog('blog6')">
+      <span class="blog-tag">Story Behind the Shot</span>
+      <span class="blog-date">December 2024</span>
+      <h3 class="blog-title">The Vandana Fashion Shoot — Behind the Scenes</h3>
+      <p class="blog-excerpt">It was our third location change in two hours. The light was wrong, the wind was stronger than expected, and the model had never worked in front of a camera before. Then everything clicked.</p>
+      <span class="blog-read">Read More →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+  <div class="cta-inner fade-up">
+    <p class="section-eyebrow">Open to Collaboration</p>
+    <h2 class="cta-title">Start a Project</h2>
+    <a href="contact.html" class="btn-primary">Get in Touch →</a>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-brand">Ravish Bramhe</div>
+  <div class="footer-copy">© 2025 Ravish Rajiv Bramhe. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<!-- ── BLOG MODALS ───────────────────────────────── -->
+
+<div class="blog-modal" id="blog1" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog1')">✕ Close</button>
+    <span class="blog-modal-tag">Fashion Photography</span>
+    <h2 class="blog-modal-title">5 Tips That Will Instantly Improve Your Fashion Photographs</h2>
+    <span class="blog-modal-date">May 2025 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/fashion/VB5490 (11).jpg" alt="Fashion photography behind the scenes">
+    <div class="blog-modal-body">
+      <p>Fashion photography is not about having the most expensive camera or the biggest studio. It is about understanding your subject, reading the light, and making your model feel so comfortable that they forget the camera exists entirely.</p>
+      <p>After four years of shooting fashion in Varanasi — from small local designers to established brands — here are five things I wish someone had told me at the beginning.</p>
+
+      <h3>1. Light is everything — learn to see it before you shoot</h3>
+      <p>Before I raise my camera, I spend five minutes studying the light in the location. Where is it coming from? Is it harsh or soft? Is there a reflective surface nearby I can use? Natural light, especially in the early morning or the golden hour just before sunset, is almost always more flattering than artificial light. In Varanasi, the morning light near the ghats has a warmth I have never found anywhere else — and I use it as often as I can.</p>
+
+      <h3>2. Direct your model, do not just photograph them</h3>
+      <p>Most people freeze in front of a camera. It is your job as the photographer to break that tension. Talk to your model constantly. Give them small, specific directions — "tilt your chin just slightly down," "look past my shoulder," "take one step forward and pause." The moment they stop thinking about the camera is the moment you get your best shot.</p>
+
+      <blockquote>"The best fashion photograph is the one where you forget you are looking at a photograph."</blockquote>
+
+      <h3>3. Shoot more than you think you need</h3>
+      <p>On a fashion shoot I typically take three to four times more frames than I expect to use. This is not because I am being careless — it is because the perfect expression, the perfect movement, and the perfect light rarely all align at the same moment. Give yourself options in post.</p>
+
+      <h3>4. Pay attention to the background</h3>
+      <p>A brilliant subject in front of a cluttered background is a wasted shot. Before every frame, quickly scan the edges of your viewfinder. Remove distractions, simplify the frame, and let your subject breathe.</p>
+
+      <h3>5. Review your work critically — but not on set</h3>
+      <p>Chimping (checking your screen after every shot) kills momentum on a fashion shoot. Shoot your set, keep your energy up, and review when the session is done. You will see your work more clearly with fresh eyes — and your model will thank you for not making them wait every thirty seconds.</p>
+
+      <p>Fashion photography is a skill you build one shoot at a time. Be patient with yourself, stay curious, and never stop learning from every image you make.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-modal" id="blog2" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog2')">✕ Close</button>
+    <span class="blog-modal-tag">Product Photography</span>
+    <h2 class="blog-modal-title">How to Shoot Products That Actually Sell</h2>
+    <span class="blog-modal-date">April 2025 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/product/Globe 1.jpg" alt="Product photography setup">
+    <div class="blog-modal-body">
+      <p>A great product photograph does not just show what something looks like — it makes the viewer want to own it. There is a significant difference between a product image that records an object and one that sells it. After shooting for brands like IndianShelf and Klothing Yards, here is what I have learned.</p>
+
+      <h3>Understand what the product is saying</h3>
+      <p>Every product has a personality. A handcrafted wooden shelf says warmth, craftsmanship, and home. A fashion garment says aspiration, identity, and style. Before I set up a single light or touch my camera, I ask: what does this product want to communicate? The answer shapes everything — the background, the lighting, the angle, and the mood.</p>
+
+      <h3>Keep it clean, keep it intentional</h3>
+      <p>The most common mistake in product photography is visual noise. Too many props, too busy a background, too much going on around the product itself. My rule is simple — if it does not serve the product, it does not belong in the frame. A clean white background, a textured surface, or a single carefully chosen prop is almost always enough.</p>
+
+      <blockquote>"Simplicity is not laziness. It is the hardest discipline in product photography."</blockquote>
+
+      <h3>Light for texture, not just brightness</h3>
+      <p>Good product lighting reveals texture. A single diffused light source coming from a 45-degree angle will show the grain of wood, the weave of fabric, or the finish of metal far better than flat, even lighting ever will. I shoot most of my product work with one key light and a reflector — nothing more.</p>
+
+      <h3>Shoot multiple angles, always</h3>
+      <p>E-commerce clients need front, side, back, detail, and lifestyle shots at minimum. I always deliver a full set rather than a single hero image. This gives the brand flexibility and gives the customer confidence.</p>
+
+      <h3>The lifestyle shot changes everything</h3>
+      <p>A product in context — a bookshelf styled with books, a garment on a real person in a real setting — consistently outperforms plain product shots in terms of customer engagement. I always include at least one lifestyle image in every product shoot. It is the image that answers the question the customer is really asking: "What will this look like in my life?"</p>
+
+      <p>Product photography is a quiet, precise discipline. Get it right and the product sells itself. Get it wrong and even the best product looks ordinary.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-modal" id="blog3" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog3')">✕ Close</button>
+    <span class="blog-modal-tag">Event Photography</span>
+    <h2 class="blog-modal-title">How to Capture Events Without Missing a Single Moment</h2>
+    <span class="blog-modal-date">March 2025 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/events/_A743311.jpg" alt="Event photography at a conference">
+    <div class="blog-modal-body">
+      <p>Events move fast. People move faster. A keynote speaker pauses for exactly the right expression for half a second. Two colleagues share a genuine laugh across a crowded room. A dignitary shakes hands and the moment is gone before most photographers have raised their camera. After shooting large-scale conferences and events for institutions like IMS BHU, I have developed a system that ensures I never miss the moments that matter.</p>
+
+      <h3>Arrive early and walk the entire venue</h3>
+      <p>I always arrive at least one hour before any event begins. I walk every room, note where the light falls, identify the key moments likely to happen (the welcome address, the award ceremony, the networking break), and position myself accordingly. This preparation is invisible in the final images — but it is the reason those images exist.</p>
+
+      <h3>Know the programme inside out</h3>
+      <p>I ask the organiser for a full schedule before every event. I highlight the five or six moments that are non-negotiable — the moments the client will judge the entire shoot by. Everything else I capture as a bonus. Know what matters most, and be ready for it.</p>
+
+      <blockquote>"In event photography, anticipation is worth more than reaction speed."</blockquote>
+
+      <h3>Shoot in continuous mode, but think in singles</h3>
+      <p>I use continuous shooting for applause moments, award handovers, and any movement — but I am always looking for the single decisive frame rather than hoping one appears in a burst. Knowing when to press the shutter is more valuable than how fast your camera can shoot.</p>
+
+      <h3>Capture the quiet moments too</h3>
+      <p>The best event photographs are often not the headline moments. They are the speaker backstage collecting their thoughts, the delegate reading their notes before a panel, the organiser exhaling with relief at the end of a successful day. These images tell the full story of an event — not just the highlights.</p>
+
+      <h3>Deliver quickly</h3>
+      <p>Event clients often need images the same day or the next morning for social media and press. I have a fast culling and editing workflow that allows me to deliver a first selection within hours of an event ending. Speed, combined with quality, is what brings clients back.</p>
+
+      <p>Event photography is a skill of presence — being in the right place, at the right moment, with the right mindset. There are no second takes. That is what makes it one of the most demanding and most rewarding disciplines in photography.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-modal" id="blog4" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog4')">✕ Close</button>
+    <span class="blog-modal-tag">Varanasi</span>
+    <h2 class="blog-modal-title">Life as a Photographer in the World's Oldest City</h2>
+    <span class="blog-modal-date">February 2025 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/street/IMG_8274.jpg" alt="Streets of Varanasi">
+    <div class="blog-modal-body">
+      <p>Varanasi does not give you easy photographs. It gives you real ones. Living and working here has taught me things about light, patience, and humanity that no photography course ever could.</p>
+
+      <p>People often ask me what it is like to be a professional photographer in Varanasi. My honest answer is that it is one of the greatest privileges I can imagine — and one of the most demanding environments I have ever worked in.</p>
+
+      <h3>The city changes you before you change your settings</h3>
+      <p>When I first picked up a camera seriously, I tried to photograph Varanasi the way I had seen it photographed in magazines and on Instagram — the burning ghats at dusk, the sadhus in orange, the boats on the Ganga at sunrise. Those images exist and they are beautiful. But they are not mine. It took me almost a year of shooting here before I stopped looking for the famous frame and started looking for the true one.</p>
+
+      <p>The true Varanasi is in the chai stall at 6 AM where the same five men have sat every morning for twenty years. It is in the tailor on Vishwanath Gali who sews without looking up. It is in the medical student cycling through the lanes of BHU at dusk, textbook balanced on the handlebars. These are the frames I look for now.</p>
+
+      <blockquote>"Varanasi rewards the patient eye. Rush it and you get a postcard. Wait and you get the truth."</blockquote>
+
+      <h3>The light here is unlike anywhere else</h3>
+      <p>The morning light in Varanasi, particularly near the river between October and February, has a quality I have never encountered elsewhere. It is warm, diffused, and somehow ancient — as though the light itself carries the memory of every morning it has illuminated this city for the past three thousand years. I plan most of my personal projects around it.</p>
+
+      <h3>Working commercially in a traditional city</h3>
+      <p>Building a commercial photography practice in Varanasi has required patience and trust-building in equal measure. Many clients here were initially hesitant about professional photography — it felt like an unnecessary expense when a phone photograph would do. Showing them the difference, image by image and project by project, has been the most rewarding part of my career so far.</p>
+
+      <p>Today I work with brands and institutions across the city and beyond. But Varanasi itself remains my most important client. It keeps teaching me — about stillness, about observation, about the fact that the best photograph is always the next one.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-modal" id="blog5" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog5')">✕ Close</button>
+    <span class="blog-modal-tag">Story Behind the Shot</span>
+    <h2 class="blog-modal-title">The Ghat at Dawn — A Story Behind the Frame</h2>
+    <span class="blog-modal-date">January 2025 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/street/DSC00027.jpg" alt="Varanasi ghat at dawn">
+    <div class="blog-modal-body">
+      <p>I arrived at the ghats at 4:47 AM. The city was still sleeping. The Ganga was still. The only sound was the distant bell of a temple somewhere up the lane, and the quiet lapping of water against the stone steps below me.</p>
+
+      <p>I had not planned to shoot that morning. I had my camera with me — I almost always do — but I had come to the ghat for the same reason I often do before a busy shoot day: to be quiet, and to think.</p>
+
+      <h3>The frame I did not plan</h3>
+      <p>At around 5:15, an elderly man descended the steps near where I was sitting. He moved slowly, deliberately, the way people move when they have performed the same action ten thousand times and see no reason to hurry it. He reached the water, cupped it in both hands, and held it toward the first grey light appearing over the river.</p>
+
+      <p>I raised my camera. I did not adjust my settings. I pressed the shutter once.</p>
+
+      <p>That single frame — underexposed by half a stop, slightly soft at the edges, with a boat barely visible in the background — became one of the images I am most proud of in four years of photography. Not because it is technically perfect. Because it is completely true.</p>
+
+      <blockquote>"The photographs I planned taught me technique. The photographs I did not plan taught me photography."</blockquote>
+
+      <h3>What that morning taught me</h3>
+      <p>I went back to the same ghat the following three mornings with my tripod, my filters, and my settings dialled in perfectly. I took hundreds of frames. None of them came close to that single accidental shot from the morning I was just sitting and thinking.</p>
+
+      <p>There is a lesson in that which I return to constantly. Preparation matters. Technical skill matters. But presence — being fully awake and attentive in the moment you are in — matters more than all of it combined.</p>
+
+      <p>The ghat at dawn is still there. I still go. And I still bring my camera, just in case.</p>
+    </div>
+  </div>
+</div>
+
+<div class="blog-modal" id="blog6" role="dialog" aria-modal="true">
+  <div class="blog-modal-inner">
+    <button class="blog-modal-close" onclick="closeBlog('blog6')">✕ Close</button>
+    <span class="blog-modal-tag">Story Behind the Shot</span>
+    <h2 class="blog-modal-title">The Vandana Fashion Shoot — Behind the Scenes</h2>
+    <span class="blog-modal-date">December 2024 · By Ravish Rajiv Bramhe</span>
+    <img class="blog-modal-img" src="assets/images/fashion/VB5495 (3).jpg" alt="Behind the scenes of a fashion shoot">
+    <div class="blog-modal-body">
+      <p>It was our third location change in two hours. The light was wrong at the first spot — a construction crane had appeared overnight directly behind our planned background. The second location was perfect until a wedding procession arrived, filling the lane with music, colour, and very cheerfully immovable people. By the time we reached the third spot, the model — shooting her first professional job — was visibly nervous, and I was quietly recalculating how much daylight we had left.</p>
+
+      <p>Then everything clicked.</p>
+
+      <h3>Finding the frame in the chaos</h3>
+      <p>The third location was not on my original list. It was a narrow lane I had noticed while we were driving between locations — the kind of place you only see when you are paying attention even when you are stressed. Old plaster walls the colour of turmeric. A single wooden door painted deep blue. Morning light angling in from the east at exactly the angle I needed.</p>
+
+      <p>I asked the driver to stop. We had twenty minutes of good light left. I set up in four minutes, spoke to the model for another five — not about photography, just about her, about Varanasi, about what she had eaten for breakfast — and then we shot.</p>
+
+      <blockquote>"The best location is not always the one you planned. Sometimes it is the one the day gives you."</blockquote>
+
+      <h3>When the model forgot the camera</h3>
+      <p>There is a moment in almost every shoot — if you create the right conditions — when the subject stops being aware of the camera. For this model, it happened about twelve minutes in. She was mid-sentence, laughing at something I had said, completely unselfconscious, standing in that golden lane in front of that blue door. I pressed the shutter. That is the hero image of the entire campaign.</p>
+
+      <h3>What the client said</h3>
+      <p>When I delivered the images the following evening, the client at Vandana Fashion was quiet for a long moment after opening the first photograph. Then she said: "This looks like her, but better. How did you do that?" I told her the truth — I did not do anything. I just waited for her model to be herself, and then I photographed that.</p>
+
+      <p>That is the whole job, really. Create the conditions for something real to happen, and be ready when it does.</p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/gallery-data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  function openBlog(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBlog(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close on backdrop click
+  document.querySelectorAll('.blog-modal').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeBlog(this.id);
+    });
+  });
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.blog-modal.open').forEach(m => closeBlog(m.id));
+    }
+  });
+</script>
+</body>
+</html>
